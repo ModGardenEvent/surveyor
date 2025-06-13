@@ -29,6 +29,8 @@ public class MixinMinecraftServer implements SurveyorServer {
 	@Inject(method = "save", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/MinecraftServer;getOverworld()Lnet/minecraft/server/world/ServerWorld;"))
 	private void saveSummary(boolean suppressLogs, boolean flush, boolean force, CallbackInfoReturnable<Boolean> cir) {
 		MinecraftServer self = (MinecraftServer) (Object) this;
+		if (surveyor$summary == null)
+			return;
 		surveyor$summary.save(self, force, suppressLogs);
 	}
 }

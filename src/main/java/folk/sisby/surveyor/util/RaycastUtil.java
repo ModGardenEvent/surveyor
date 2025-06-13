@@ -25,7 +25,7 @@ public class RaycastUtil {
 		double y = blockRadius * Math.tan(phi);
 		double distance;
 		double bottom = player.getWorld().getBottomY() - cameraPos.y;
-		double top = player.getWorld().getTopY() - cameraPos.y;
+		double top = player.getWorld().getHeight() - cameraPos.y;
 		if (y < bottom || y > top) { // Distance To Circular Planes
 			distance = Math.abs(MathHelper.clamp(y, bottom, top) / Math.sin(phi));
 		} else { // Distance To Curved Surface

@@ -55,19 +55,19 @@ public class JigsawPieceSummary extends StructurePieceSummary {
 
 	public JigsawPieceSummary(NbtCompound nbt) {
 		super(nbt);
-		this.pos = BlockPos.fromLong(nbt.getLong(KEY_POS));
-		this.deltaY = nbt.getInt(KEY_DELTA_Y);
-		this.rotation = BlockRotation.values()[nbt.getInt(KEY_ROTATION)];
+		this.pos = BlockPos.fromLong(nbt.getLong(KEY_POS).orElseThrow());
+		this.deltaY = nbt.getInt(KEY_DELTA_Y).orElseThrow();
+		this.rotation = BlockRotation.values()[nbt.getInt(KEY_ROTATION).orElseThrow()];
 		this.junctions = new ArrayList<>();
 		if (nbt.contains(KEY_JUNCTIONS)) {
-			int[] junctionArray = nbt.getIntArray(KEY_JUNCTIONS);
+			int[] junctionArray = nbt.getIntArray(KEY_JUNCTIONS).orElseThrow();
 			for (int i = 4; i <= junctionArray.length; i += 5) {
 				junctions.add(new JigsawJunction(junctionArray[i - 4], junctionArray[i - 3], junctionArray[i - 2], junctionArray[i - 1], StructurePool.Projection.values()[junctionArray[i]]));
 			}
 		}
 		String idKey = TYPE_KEYS.keySet().stream().filter(nbt::contains).findFirst().orElseThrow();
 		this.elementType = TYPE_KEYS.get(idKey);
-		this.id = Identifier.of(nbt.getString(idKey));
+		this.id = Identifier.of(nbt.getString(idKey).orElseThrow());
 	}
 
 	public static List<StructurePieceSummary> tryFromElement(StructurePoolElement poolElement, PoolStructurePiece piece) {

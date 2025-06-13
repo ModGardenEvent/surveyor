@@ -34,7 +34,7 @@ public class LandmarkComponentTypes {
 
 	public static LandmarkComponentMap.Builder forBlock(LandmarkComponentMap.Builder builder, WorldAccess world, BlockPos pos) {
 		BlockState state = world.getBlockState(pos);
-		ItemStack stack = state.getBlock().getPickStack(world, pos, world.getBlockState(pos));
+		ItemStack stack = state.getPickStack(world, pos, false);
 		BlockEntity entity = world.getBlockEntity(pos);
 		if (entity != null && Registries.BLOCK_ENTITY_TYPE.getKey(entity.getType()).map(t -> Surveyor.CONFIG.builtins.allowedBlockEntities.contains(t.toString())).orElse(false)) {
 			BlockItem.setBlockEntityData(stack, entity.getType(), entity.createNbt(world.getRegistryManager()));

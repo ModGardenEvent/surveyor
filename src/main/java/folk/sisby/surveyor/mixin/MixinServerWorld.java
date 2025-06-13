@@ -35,7 +35,7 @@ public class MixinServerWorld implements SurveyorWorld {
 		SurveyorEvents.Invoke.worldLoad(self);
 	}
 
-	@Inject(method = "method_19499", at = @At("HEAD"))
+	@Inject(method = "method_66018", at = @At("HEAD"))
 	public void onPointOfInterestAdded(BlockPos blockPos, RegistryEntry<PointOfInterestType> poiType, CallbackInfo ci) {
 		ServerWorld self = (ServerWorld) (Object) this;
 		WorldSummary summary = WorldSummary.of(self);
@@ -48,7 +48,7 @@ public class MixinServerWorld implements SurveyorWorld {
 		));
 	}
 
-	@Inject(method = "method_39222", at = @At("HEAD"))
+	@Inject(method = "method_66015", at = @At("HEAD"))
 	public void onPointOfInterestRemoved(BlockPos blockPos, CallbackInfo ci) {
 		ServerWorld self = (ServerWorld) (Object) this;
 		WorldSummary summary = WorldSummary.of(self);
